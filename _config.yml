@@ -1,0 +1,17 @@
+title: buriburiza3mon
+description: Blog | Writeups | About
+theme: jekyll-theme-chirpy
+lang: en
+timezone: UTC
+theme_mode: dark
+url: "" # Will be filled in once deployed
+baseurl: "" # Will be filled in once deployed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Enable custom styling
+custom_css:
+  - /assets/css/custom.css

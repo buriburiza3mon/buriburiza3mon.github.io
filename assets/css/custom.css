@@ -1,0 +1,19 @@
+/* Force green font */
+body, p, h1, h2, h3, h4, h5, h6, a, span, li {
+    color: #41FF00 !important;
+  }
+  
+  /* Links */
+  a {
+    color: #41FF00 !important;
+  }
+  a:hover {
+    text-shadow: 0 0 5px #41FF00;
+  }
+  
+  /* Optional: glowing navbar */
+  .site-title, .nav-item a {
+    color: #41FF00 !important;
+    text-shadow: 0 0 3px #41FF00;
+  }
+  
