@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "welcome-to-my-blog",
+    "title": "Welcome to My New Blog!",
+    "date": "2025-05-26",
+    "author": "buriburiza3mon",
+    "snippet": "This is the very first post on my new blog. I'm excited to share my thoughts and experiences with you all.",
+    "markdownFile": "posts/welcome-post.md"
+  },
+  {
+    "slug": "thoughts-on-static-sites",
+    "title": "My Thoughts on Static Site Generators",
+    "date": "2025-05-27",
+    "author": "buriburiza3mon",
+    "snippet": "Exploring the world of static sites and why they are a great choice for personal blogs and portfolios.",
+    "markdownFile": "posts/another-post.md"
+  }
+]
