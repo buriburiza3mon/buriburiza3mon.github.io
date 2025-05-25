@@ -14,5 +14,13 @@
     "author": "buriburiza3mon",
     "snippet": "Exploring the world of static sites and why they are a great choice for personal blogs and portfolios.",
     "markdownFile": "posts/another-post.md"
+  },
+    {
+    "slug": "active-directory-basics",
+    "title": "Active Directory Basics",
+    "date": "2025-05-27",
+    "author": "buriburiza3mon",
+    "snippet": "Exploring the basics of active directory.",
+    "markdownFile": "posts/active-directory-basics.md"
   }
 ]
