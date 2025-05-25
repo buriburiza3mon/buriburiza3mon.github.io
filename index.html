@@ -1,22 +1,76 @@
----
-layout: default
-title: Home
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buriburiza3mon's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for a more integrated feel with the dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e; /* Slightly lighter dark grey */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555; /* Medium grey */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777; /* Lighter grey on hover */
+        }
+    </style>
+</head>
+<body class="bg-neutral-900 text-neutral-200 antialiased">
 
-<div class="home">
-  <h2>Latest Posts</h2>
-  <ul class="post-list">
-    {% for post in site.posts limit:10 %}  <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h2>
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h2>
-        <div class="post-excerpt">
-          {{ post.excerpt }} </div>
-      </li>
-    {% endfor %}
-  </ul>
+    <header class="bg-neutral-800 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-bold text-white site-title">
+                    <a href="index.html">buriburiza3mon's Blog</a>
+                </h1>
+                <nav>
+                    <a href="index.html" class="text-sky-400 hover:text-sky-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                    </nav>
+            </div>
+        </div>
+    </header>
 
-  {% if site.posts.size > 10 %}
-    <p><a href="/archive/">View all posts</a></p> {% endif %}
-</div>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8">Latest Posts</h2>
+        
+        <div id="posts-list" class="space-y-8">
+            <!-- 
+            <article class="bg-neutral-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-bold mb-2">
+                    <a href="#" class="text-sky-400 hover:text-sky-300">Post Title</a>
+                </h3>
+                <p class="text-sm text-neutral-400 mb-3">Published on: YYYY-MM-DD by Author</p>
+                <p class="text-neutral-300 leading-relaxed">Post snippet...</p>
+            </article> 
+            -->
+        </div>
+        <div id="loading-indicator" class="text-center py-10 text-neutral-400">
+            <p>Loading posts...</p>
+        </div>
+    </main>
+
+    <footer class="bg-neutral-800 text-neutral-400 text-center py-6 mt-12">
+        <p>&copy; <span id="current-year"></span> buriburiza3mon. All rights reserved.</p>
+        <p class="text-sm">Powered by static HTML, JS, and your awesome content!</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
