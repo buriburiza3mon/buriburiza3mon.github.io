@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Title - buriburiza3mon's Blog</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+        /* Styling for generated HTML from Markdown */
+        .prose-custom {
+            color: #e0e0e0; /* Default text color for prose */
+        }
+        .prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4, .prose-custom h5, .prose-custom h6 {
+            color: #ffffff; /* White for headings */
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        .prose-custom p {
+            margin-bottom: 1em;
+            line-height: 1.7;
+        }
+        .prose-custom a {
+            color: #38bdf8; /* sky-400 */
+            text-decoration: underline;
+        }
+        .prose-custom a:hover {
+            color: #7dd3fc; /* sky-300 */
+        }
+        .prose-custom ul, .prose-custom ol {
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+        .prose-custom li {
+            margin-bottom: 0.5em;
+        }
+        .prose-custom blockquote {
+            border-left: 4px solid #4b5563; /* gray-600 */
+            padding-left: 1em;
+            margin-left: 0;
+            font-style: italic;
+            color: #9ca3af; /* gray-400 */
+        }
+        .prose-custom pre {
+            background-color: #2d2d2d; /* Slightly lighter than bg-neutral-800 */
+            color: #e0e0e0;
+            padding: 1em;
+            border-radius: 0.375rem; /* rounded-md */
+            overflow-x: auto;
+        }
+        .prose-custom code {
+            background-color: #2d2d2d;
+            color: #f08080; /* Light coral for inline code */
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+        }
+        .prose-custom pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .prose-custom img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.375rem; /* rounded-md */
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body class="bg-neutral-900 text-neutral-200 antialiased">
+
+    <header class="bg-neutral-800 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-bold text-white site-title">
+                     <a href="index.html">buriburiza3mon's Blog</a>
+                </h1>
+                <nav>
+                    <a href="index.html" class="text-sky-400 hover:text-sky-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <article id="post-content-container" class="bg-neutral-800 p-6 sm:p-8 rounded-lg shadow-lg">
+            <div id="post-title-date" class="mb-6 pb-6 border-b border-neutral-700">
+                </div>
+            <div id="post-content" class="prose-custom">
+                </div>
+            <div id="post-loading-indicator" class="text-center py-10 text-neutral-400">
+                <p>Loading post...</p>
+            </div>
+            <div id="post-not-found" class="text-center py-10 text-red-400 hidden">
+                <p class="text-2xl font-semibold">Oops! Post not found.</p>
+                <p>The post you are looking for does not exist or may have been moved.</p>
+                <a href="index.html" class="mt-4 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded">Back to Home</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-neutral-800 text-neutral-400 text-center py-6 mt-12">
+        <p>&copy; <span id="current-year"></span> buriburiza3mon. All rights reserved.</p>
+        <p class="text-sm">Powered by static HTML, JS, and your awesome content!</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
