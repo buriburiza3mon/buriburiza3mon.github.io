@@ -1,0 +1,10 @@
+<footer>
+    <div class="container">
+        <p>{{ site.footer_content | replace: "YYYY", site.time | date: "%Y" }}</p>
+        {% if site.github_username %}
+        <p>
+            <a href="https://github.com/{{ site.github_username }}">GitHub</a>
+        </p>
+        {% endif %}
+    </div>
+</footer>
