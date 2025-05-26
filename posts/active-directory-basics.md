@@ -129,6 +129,7 @@ The most important part of Active Directory -- as well as the most vulnerable pa
 
 The best way to show you how the cloud takes security precautions past what is already provided with a physical network is to show you a comparison with a cloud Active Directory environment:
 
+
 | Windows Server AD   | Azure AD       |
 | ------------------- | -------------- |
 | LDAP                | Rest API       |
@@ -137,6 +138,7 @@ The best way to show you how the cloud takes security precautions past what is a
 | OU Trees            | Flat Structure |
 | Domains and Forests | Tenants        |
 | Trusts              | Guests         |
+
 
 ## Hands On-Lab
 
