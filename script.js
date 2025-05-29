@@ -10,33 +10,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunIcons = document.querySelectorAll('#theme-icon-sun');
     const moonIcons = document.querySelectorAll('#theme-icon-moon');
 
-    function applyTheme(theme) {
+    // Function to apply the theme and update the button icon
+    function applyThemeAndIcon(theme) {
         if (theme === 'dark') {
             htmlElement.classList.add('dark');
-            sunIcons.forEach(icon => icon.classList.remove('hidden'));
+            sunIcons.forEach(icon => icon.classList.remove('hidden')); // Show sun icon (click to go light)
             moonIcons.forEach(icon => icon.classList.add('hidden'));
-        } else {
+        } else { // theme === 'light'
             htmlElement.classList.remove('dark');
             sunIcons.forEach(icon => icon.classList.add('hidden'));
-            moonIcons.forEach(icon => icon.classList.remove('hidden'));
+            moonIcons.forEach(icon => icon.classList.remove('hidden')); // Show moon icon (click to go dark)
         }
     }
 
-    // Load saved theme or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme) {
-        applyTheme(savedTheme);
+    // Initial theme setup:
+    // Default to light mode unless a theme was explicitly set by the user and stored.
+    const userSetTheme = localStorage.getItem('theme');
+    if (userSetTheme) {
+        applyThemeAndIcon(userSetTheme); // Apply user's last explicitly set theme
     } else {
-        applyTheme(prefersDark ? 'dark' : 'light');
+        applyThemeAndIcon('light'); // Default to light mode if no user preference is stored
     }
 
     themeToggleButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const isDark = htmlElement.classList.toggle('dark');
-            const newTheme = isDark ? 'dark' : 'light';
-            localStorage.setItem('theme', newTheme);
-            applyTheme(newTheme);
+            // Determine the new theme: if 'dark' is currently present, the new theme will be 'light', and vice versa.
+            const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', newTheme); // Save the user's explicit choice
+            applyThemeAndIcon(newTheme);
         });
     });
     
@@ -45,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSiteTitles(pageTitle, postSpecificTitle = null) {
         const finalTitle = postSpecificTitle ? `${postSpecificTitle} - ${pageTitle}` : pageTitle;
         document.title = finalTitle;
-        // Site title in header is now static as per new HTML
-        // siteTitleElements.forEach(el => el.textContent = pageTitle); 
     }
     updateSiteTitles(defaultSiteTitle);
 
@@ -58,22 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const noResultsMessage = document.getElementById('no-results-message');
         const searchResultsCount = document.getElementById('search-results-count');
         
-        // Search inputs (header and main content for different screen sizes)
         const searchInputHeader = document.getElementById('search-input-header');
         const searchClearHeader = document.getElementById('search-clear-header');
         const searchInputMain = document.getElementById('search-input-main');
         const searchClearMain = document.getElementById('search-clear-main');
 
         function displayPosts(postsToDisplay) {
-            postsListContainer.innerHTML = ''; // Clear previous
-            if (postsToDisplay.length === 0) {
+            postsListContainer.innerHTML = ''; 
+            if (postsToDisplay.length === 0 && ( (searchInputHeader && searchInputHeader.value) || (searchInputMain && searchInputMain.value) ) ) {
                 noResultsMessage.classList.remove('hidden');
-                postsListContainer.innerHTML = ''; // Ensure it's empty
             } else {
                 noResultsMessage.classList.add('hidden');
-                postsToDisplay.forEach(post => {
+            }
+            
+            if (postsToDisplay.length === 0 && !( (searchInputHeader && searchInputHeader.value) || (searchInputMain && searchInputMain.value) ) ) {
+                 // If no posts at all and not searching, show a generic "no posts yet"
+                postsListContainer.innerHTML = '<p class="text-neutral-500 dark:text-neutral-400">No posts yet. Stay tuned!</p>';
+            } else {
+                 postsToDisplay.forEach(post => {
                     const postElement = document.createElement('article');
-                    // Added more descriptive classes for easier light/dark styling
                     postElement.className = 'bg-neutral-50 dark:bg-neutral-800 p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-[1.02] border border-neutral-200 dark:border-neutral-700';
                     
                     const title = post.title || 'Untitled Post';
@@ -94,8 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     postsListContainer.appendChild(postElement);
                 });
             }
+
             if (searchResultsCount) {
-                searchResultsCount.textContent = `${postsToDisplay.length} post(s) found.`;
+                if ((searchInputHeader && searchInputHeader.value) || (searchInputMain && searchInputMain.value)) {
+                    searchResultsCount.textContent = `${postsToDisplay.length} post(s) found.`;
+                } else {
+                    searchResultsCount.textContent = ''; // Clear count if not searching
+                }
             }
         }
 
@@ -104,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (loadingIndicator) loadingIndicator.style.display = 'none';
 
             if (!lowerCaseTerm) {
-                displayPosts(allFetchedPosts); // Show all if search is empty
+                displayPosts(allFetchedPosts); 
                 if(searchResultsCount) searchResultsCount.textContent = '';
                 return;
             }
@@ -113,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return (post.title && post.title.toLowerCase().includes(lowerCaseTerm)) ||
                        (post.snippet && post.snippet.toLowerCase().includes(lowerCaseTerm)) ||
                        (post.author && post.author.toLowerCase().includes(lowerCaseTerm)); 
-                       // Add || (post.markdownFileContent && post.markdownFileContent.toLowerCase().includes(lowerCaseTerm)) if searching full content
             });
             displayPosts(filteredPosts);
         }
@@ -127,20 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 allFetchedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
-                // Check for search query in URL (e.g., from post.html search bar)
                 const urlParams = new URLSearchParams(window.location.search);
                 const searchQueryFromUrl = urlParams.get('search');
 
                 if (searchQueryFromUrl) {
-                    // Populate search bars and trigger search
                     if(searchInputHeader) searchInputHeader.value = searchQueryFromUrl;
                     if(searchInputMain) searchInputMain.value = searchQueryFromUrl;
                     handleSearch(searchQueryFromUrl);
-                    if(searchInputHeader) searchClearHeader.classList.toggle('hidden', !searchQueryFromUrl);
-                    if(searchInputMain) searchClearMain.classList.toggle('hidden', !searchQueryFromUrl);
-
+                    if(searchInputHeader && searchClearHeader) searchClearHeader.classList.toggle('hidden', !searchQueryFromUrl);
+                    if(searchInputMain && searchClearMain) searchClearMain.classList.toggle('hidden', !searchQueryFromUrl);
                 } else {
-                    displayPosts(allFetchedPosts); // Display all posts initially
+                    displayPosts(allFetchedPosts);
                 }
 
             } catch (error) {
@@ -153,14 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         fetchAndPreparePosts();
 
-        // Search Event Listeners
         function setupSearchInput(inputElement, clearButtonElement) {
             if (!inputElement) return;
             inputElement.addEventListener('keyup', (e) => {
                 const searchTerm = e.target.value;
                 handleSearch(searchTerm);
                 if(clearButtonElement) clearButtonElement.classList.toggle('hidden', !searchTerm);
-                // Sync other search bar if present
                 if (inputElement === searchInputHeader && searchInputMain) searchInputMain.value = searchTerm;
                 if (inputElement === searchInputMain && searchInputHeader) searchInputHeader.value = searchTerm;
             });
@@ -169,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     inputElement.value = '';
                     handleSearch('');
                     clearButtonElement.classList.add('hidden');
-                    if (inputElement === searchInputHeader && searchInputMain) searchInputMain.value = '';
-                    if (inputElement === searchInputMain && searchInputHeader) searchInputHeader.value = '';
+                    if (inputElement === searchInputHeader && searchInputMain) { searchInputMain.value = ''; if(searchClearMain) searchClearMain.classList.add('hidden'); }
+                    if (inputElement === searchInputMain && searchInputHeader) { searchInputHeader.value = ''; if(searchClearHeader) searchClearHeader.classList.add('hidden'); }
                     inputElement.focus();
                 });
             }
@@ -193,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const postId = urlParams.get('id');
 
             if (!postId) {
-                // ... (error handling as before)
                 if(postLoadingIndicator) postLoadingIndicator.style.display = 'none';
                 if(postNotFoundMessage) postNotFoundMessage.classList.remove('hidden');
                 updateSiteTitles(defaultSiteTitle, "Post Not Found");
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch(postsJsonPath);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const allPostsData = await response.json(); // Renamed to avoid conflict
+                const allPostsData = await response.json();
                 if (!Array.isArray(allPostsData)) throw new Error(`${postsJsonPath} is not a valid JSON array.`);
                 
                 const postData = allPostsData.find(p => p.slug === postId);
@@ -241,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         fetchAndDisplaySinglePost();
         
-        // If search input exists on post page header, make it redirect to index with query
         const searchInputHeaderPost = document.getElementById('search-input-header-post');
         if(searchInputHeaderPost) {
             searchInputHeaderPost.addEventListener('keypress', function(e) {
