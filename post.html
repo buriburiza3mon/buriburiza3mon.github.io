@@ -1,116 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" class=""> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Title - buriburiza3mon's Blog</title> <script src="https://cdn.tailwindcss.com"></script>
+    <title>Post Title - buriburiza3mon's Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e1e1e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #555;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #777;
-        }
+        /* Custom scrollbar for dark theme */
+        .dark ::-webkit-scrollbar { width: 8px; }
+        .dark ::-webkit-scrollbar-track { background: #1e1e1e; }
+        .dark ::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        /* Custom scrollbar for light theme */
+        html:not(.dark) ::-webkit-scrollbar { width: 8px; }
+        html:not(.dark) ::-webkit-scrollbar-track { background: #f1f1f1; }
+        html:not(.dark) ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
         /* Styling for generated HTML from Markdown */
-        .prose-custom {
-            color: #e0e0e0; /* Default text color for prose */
-        }
+        .prose-custom { color: #374151; /* gray-700 for light */ }
+        .dark .prose-custom { color: #d1d5db; /* gray-300 for dark */ }
+
         .prose-custom h1, .prose-custom h2, .prose-custom h3, .prose-custom h4, .prose-custom h5, .prose-custom h6 {
-            color: #ffffff; /* White for headings */
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
+            color: #111827; /* gray-900 for light */
+            margin-top: 1.5em; margin-bottom: 0.5em;
         }
-        .prose-custom p {
-            margin-bottom: 1em;
-            line-height: 1.7;
+        .dark .prose-custom h1, .dark .prose-custom h2, .dark .prose-custom h3, .dark .prose-custom h4, .dark .prose-custom h5, .dark .prose-custom h6 {
+            color: #ffffff; /* white for dark */
         }
-        .prose-custom a {
-            color: #38bdf8; /* sky-400 */
-            text-decoration: underline;
-        }
-        .prose-custom a:hover {
-            color: #7dd3fc; /* sky-300 */
-        }
-        .prose-custom ul, .prose-custom ol {
-            margin-left: 1.5em;
-            margin-bottom: 1em;
-        }
-        .prose-custom li {
-            margin-bottom: 0.5em;
-        }
+
+        .prose-custom p { margin-bottom: 1em; line-height: 1.7; }
+        .prose-custom a { color: #2563eb; /* blue-600 for light */ text-decoration: underline; }
+        .dark .prose-custom a { color: #38bdf8; /* sky-400 for dark */ }
+        .prose-custom a:hover { text-decoration: none; } /* Example hover */
+        
+        .prose-custom ul, .prose-custom ol { margin-left: 1.5em; margin-bottom: 1em; }
+        .prose-custom li { margin-bottom: 0.5em; }
+
         .prose-custom blockquote {
-            border-left: 4px solid #4b5563; /* gray-600 */
-            padding-left: 1em;
-            margin-left: 0;
-            font-style: italic;
-            color: #9ca3af; /* gray-400 */
+            border-left: 4px solid #d1d5db; /* gray-300 for light */
+            padding-left: 1em; margin-left: 0; font-style: italic;
+            color: #4b5563; /* gray-600 for light */
+        }
+        .dark .prose-custom blockquote {
+            border-left-color: #4b5563; /* gray-600 for dark */
+            color: #9ca3af; /* gray-400 for dark */
         }
         .prose-custom pre {
-            background-color: #2d2d2d; /* Slightly lighter than bg-neutral-800 */
-            color: #e0e0e0;
-            padding: 1em;
-            border-radius: 0.375rem; /* rounded-md */
-            overflow-x: auto;
+            background-color: #f3f4f6; /* gray-100 for light */
+            color: #1f2937; /* gray-800 for light */
+            padding: 1em; border-radius: 0.375rem; overflow-x: auto;
+        }
+        .dark .prose-custom pre {
+            background-color: #1f2937; /* gray-800 for dark */
+            color: #e5e7eb; /* gray-200 for dark */
         }
         .prose-custom code {
-            background-color: #2d2d2d;
-            color: #f08080; /* Light coral for inline code */
-            padding: 0.2em 0.4em;
-            border-radius: 0.25rem;
+            background-color: #e5e7eb; /* gray-200 for light */
+            color: #c026d3; /* fuchsia-600 for light */
+            padding: 0.2em 0.4em; border-radius: 0.25rem;
         }
-        .prose-custom pre code {
-            background-color: transparent;
-            color: inherit;
-            padding: 0;
+        .dark .prose-custom code {
+            background-color: #374151; /* gray-700 for dark */
+            color: #f08080; /* Light coral for dark */
         }
-        .prose-custom img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.375rem; /* rounded-md */
-            margin-top: 1em;
-            margin-bottom: 1em;
-        }
+        .prose-custom pre code { background-color: transparent; color: inherit; padding: 0; }
+        .prose-custom img { max-width: 100%; height: auto; border-radius: 0.375rem; margin: 1em 0; }
     </style>
 </head>
-<body class="bg-neutral-900 text-neutral-200 antialiased">
+<body class="bg-white text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 antialiased">
 
-    <header class="bg-neutral-800 shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header class="bg-neutral-100 dark:bg-neutral-800 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl sm:text-3xl font-bold text-white site-title">
+                <h1 class="text-2xl sm:text-3xl font-bold text-sky-600 dark:text-white site-title">
                      <a href="index.html">buriburiza3mon's Blog</a>
                 </h1>
-                <nav>
-                    <a href="index.html" class="text-sky-400 hover:text-sky-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                <nav class="flex items-center space-x-3 sm:space-x-4">
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="search-input-header-post" placeholder="Search..." title="Search on homepage" class="px-3 py-1.5 rounded-md text-sm bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500" style="min-width: 150px;" onfocus="if(this.value === '') { window.location.href = 'index.html'; } else { window.location.href = 'index.html?search=' + encodeURIComponent(this.value); }">
+                    </div>
+                     <button id="theme-toggle" title="Toggle theme" class="p-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
+                        <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.707.707M5.05 5.05l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.464 17.536l-.707-.707M12 5.5A6.5 6.5 0 1012 18.5a6.5 6.5 0 000-13z" /></svg>
+                        <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                    </button>
+                    <a href="index.html" class="text-sky-600 dark:text-sky-400 hover:underline px-3 py-2 rounded-md text-sm font-medium">Home</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <article id="post-content-container" class="bg-neutral-800 p-6 sm:p-8 rounded-lg shadow-lg">
-            <div id="post-title-date" class="mb-6 pb-6 border-b border-neutral-700">
+        <article id="post-content-container" class="bg-neutral-50 dark:bg-neutral-800 p-6 sm:p-8 rounded-lg shadow-lg">
+            <div id="post-title-date" class="mb-6 pb-6 border-b border-neutral-300 dark:border-neutral-700">
                 </div>
             <div id="post-content" class="prose-custom">
                 </div>
-            <div id="post-loading-indicator" class="text-center py-10 text-neutral-400">
+            <div id="post-loading-indicator" class="text-center py-10 text-neutral-500 dark:text-neutral-400">
                 <p>Loading post...</p>
             </div>
-            <div id="post-not-found" class="text-center py-10 text-red-400 hidden">
+            <div id="post-not-found" class="text-center py-10 text-red-500 dark:text-red-400 hidden">
                 <p class="text-2xl font-semibold">Oops! Post not found.</p>
                 <p>The post you are looking for does not exist or may have been moved.</p>
                 <a href="index.html" class="mt-4 inline-block bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded">Back to Home</a>
@@ -118,7 +114,7 @@
         </article>
     </main>
 
-    <footer class="bg-neutral-800 text-neutral-400 text-center py-6 mt-12">
+    <footer class="bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 text-center py-6 mt-12">
         <p>&copy; <span id="current-year"></span> buriburiza3mon. All rights reserved.</p>
         <p class="text-sm">Powered by static HTML, JS, and your awesome content!</p>
     </footer>
