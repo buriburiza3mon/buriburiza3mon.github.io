@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" class=""> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>buriburiza3mon's Blog</title>
@@ -11,58 +10,72 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* Custom scrollbar for a more integrated feel with the dark theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e1e1e; /* Slightly lighter dark grey */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #555; /* Medium grey */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #777; /* Lighter grey on hover */
-        }
+        /* Custom scrollbar for dark theme */
+        .dark ::-webkit-scrollbar { width: 8px; }
+        .dark ::-webkit-scrollbar-track { background: #1e1e1e; }
+        .dark ::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #777; }
+
+        /* Custom scrollbar for light theme */
+        html:not(.dark) ::-webkit-scrollbar { width: 8px; }
+        html:not(.dark) ::-webkit-scrollbar-track { background: #f1f1f1; }
+        html:not(.dark) ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+
+        /* Helper for hiding search clear button initially */
+        #search-clear.hidden { display: none; }
     </style>
 </head>
-<body class="bg-neutral-900 text-neutral-200 antialiased">
+<body class="bg-white text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 antialiased">
 
-    <header class="bg-neutral-800 shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header class="bg-neutral-100 dark:bg-neutral-800 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center">
-                <h1 class="text-2xl sm:text-3xl font-bold text-white site-title">
+                <h1 class="text-2xl sm:text-3xl font-bold text-sky-600 dark:text-white site-title">
                     <a href="index.html">buriburiza3mon's Blog</a>
                 </h1>
-                <nav>
-                    <a href="index.html" class="text-sky-400 hover:text-sky-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                    </nav>
+                <nav class="flex items-center space-x-3 sm:space-x-4">
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="search-input-header" placeholder="Search..." class="px-3 py-1.5 rounded-md text-sm bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500" style="min-width: 150px;">
+                         <button id="search-clear-header" class="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 text-lg hidden">&times;</button>
+                    </div>
+                    <button id="theme-toggle" title="Toggle theme" class="p-2 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
+                        <svg id="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-12.66l-.707.707M5.05 5.05l-.707.707M21 12h-1M4 12H3m15.66 8.66l-.707-.707M6.464 17.536l-.707-.707M12 5.5A6.5 6.5 0 1012 18.5a6.5 6.5 0 000-13z" /></svg>
+                        <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                    </button>
+                    <a href="index.html" class="text-sky-600 dark:text-sky-400 hover:underline px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                </nav>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-8">Latest Posts</h2>
+        <div class="mb-8 sm:hidden">
+             <label for="search-input-main" class="sr-only">Search posts</label>
+            <div class="relative">
+                <input type="text" id="search-input-main" placeholder="Search posts..." class="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                <button id="search-clear-main" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 text-xl hidden">&times;</button>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-neutral-800 dark:text-white">Latest Posts</h2>
+            <p id="search-results-count" class="text-sm text-neutral-600 dark:text-neutral-400"></p>
+        </div>
         
         <div id="posts-list" class="space-y-8">
-            <!-- 
-            <article class="bg-neutral-800 p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold mb-2">
-                    <a href="#" class="text-sky-400 hover:text-sky-300">Post Title</a>
-                </h3>
-                <p class="text-sm text-neutral-400 mb-3">Published on: YYYY-MM-DD by Author</p>
-                <p class="text-neutral-300 leading-relaxed">Post snippet...</p>
-            </article> 
-            -->
-        </div>
-        <div id="loading-indicator" class="text-center py-10 text-neutral-400">
+            </div>
+        <div id="loading-indicator" class="text-center py-10 text-neutral-500 dark:text-neutral-400">
             <p>Loading posts...</p>
+        </div>
+        <div id="no-results-message" class="text-center py-10 text-neutral-500 dark:text-neutral-400 hidden">
+            <p>No posts found matching your search.</p>
         </div>
     </main>
 
-    <footer class="bg-neutral-800 text-neutral-400 text-center py-6 mt-12">
+    <footer class="bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 text-center py-6 mt-12">
         <p>&copy; <span id="current-year"></span> buriburiza3mon. All rights reserved.</p>
         <p class="text-sm">Powered by static HTML, JS, and your awesome content!</p>
     </footer>
