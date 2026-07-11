@@ -1,6 +1,6 @@
 baseURL = "https://buriburiza3mon.github.io/"
 languageCode = "en-us"
-title = "My InfoSec Research"
+title = "buriburiza3mon"
 theme = "PaperMod"
 
 [params]
