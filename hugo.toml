@@ -1,0 +1,9 @@
+baseURL = "https://buriburiza3mon.github.io/"
+languageCode = "en-us"
+title = "My InfoSec Research"
+theme = "PaperMod"
+
+[params]
+    defaultTheme = "auto" # This gives you the automatic Light/Dark mode toggle
+    ShowReadingTime = true
+    ShowShareButtons = true

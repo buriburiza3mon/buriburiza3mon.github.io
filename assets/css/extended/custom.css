@@ -1,0 +1,11 @@
+/* Enderman Purple Accent overrides */
+:root {
+    --primary: #B154F0; 
+    --secondary: #8A2BE2; 
+    --tertiary: #2a2a2a; 
+}
+
+.dark {
+    --primary: #C97EFA; 
+    --secondary: #A052E6;
+}
