@@ -9,3 +9,45 @@
     --primary: #C97EFA; 
     --secondary: #A052E6;
 }
+/* 1. Hide the paragraph summaries completely */
+.post-entry .entry-content {
+    display: none;
+}
+
+/* 2. Create the pill-shaped outlines from the sketch */
+.post-entry {
+    display: flex;
+    flex-direction: row; /* Places title and date on the same line */
+    align-items: center;
+    justify-content: space-between; /* Pushes title left, date right */
+    
+    border: 2px solid var(--secondary); /* Uses your Enderman purple */
+    border-radius: 50px; /* Creates the extreme rounded edges */
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    background: transparent;
+    box-shadow: none;
+    transition: transform 0.2s, border-color 0.2s; 
+}
+
+/* 3. Add a slight hover effect so it feels interactive */
+.post-entry:hover {
+    transform: scale(1.02);
+    border-color: var(--primary);
+}
+
+/* 4. Keep the title clean and compact */
+.post-entry .entry-header {
+    flex: 1;
+}
+.post-entry .entry-header h2 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+/* 5. Align the right-side text (dates/reading time) */
+.post-entry .entry-footer {
+    margin: 0;
+    font-size: 0.95rem;
+    opacity: 0.7;
+}

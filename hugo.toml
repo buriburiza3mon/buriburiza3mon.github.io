@@ -7,3 +7,10 @@ theme = "PaperMod"
     defaultTheme = "auto" # This gives you the automatic Light/Dark mode toggle
     ShowReadingTime = true
     ShowShareButtons = true
+[outputs]
+    home = ["HTML", "RSS", "JSON"] 
+
+[[menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 1

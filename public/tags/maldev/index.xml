@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on My InfoSec Research</title>
-    <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on My InfoSec Research</description>
+    <title>Maldev on My InfoSec Research</title>
+    <link>http://localhost:1313/tags/maldev/</link>
+    <description>Recent content in Maldev on My InfoSec Research</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Jul 2026 20:21:00 +0530</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/maldev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Into the Dark: The Comprehensive Guide to Malware Development</title>
       <link>http://localhost:1313/posts/mal-dev/</link>
@@ -15,13 +15,6 @@
       <guid>http://localhost:1313/posts/mal-dev/</guid>
       <description>&lt;p&gt;If you want to bypass modern security controls, you have to understand how they work under the hood. You cannot rely on off-the-shelf tools forever. If you generate a default payload in Metasploit or drop a vanilla Cobalt Strike beacon on a disk, modern EDR (Endpoint Detection and Response) will flag it, kill the process, and alert the SOC before your reverse shell even connects.&lt;/p&gt;
 &lt;p&gt;That is where Malware Development (MalDev) comes in. Writing your own custom implants and loaders is the ultimate way to level up as a red teamer.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Cyber Blog Posts</title>
-      <link>http://localhost:1313/posts/first-research/</link>
-      <pubDate>Sat, 11 Jul 2026 19:07:46 +0530</pubDate>
-      <guid>http://localhost:1313/posts/first-research/</guid>
-      <description></description>
     </item>
   </channel>
 </rss>
