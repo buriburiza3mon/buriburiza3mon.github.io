@@ -13,51 +13,42 @@
 }
 
 /* ==========================================================================
-   2. TILE LAYOUT CONFIGURATION (MAIN PAGES)
+   2. TILE LAYOUT CONFIGURATION
    ========================================================================== */
 .main {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column; /* Stacks the tiles on top of each other! */
     gap: 20px;
     margin-top: 30px;
 }
 
 /* ==========================================================================
-   3. UNIFIED TILE DESIGN (FIXES HOMEPAGE & /POSTS ARCHIVE)
+   3. HORIZONTAL TILE DESIGN
    ========================================================================== */
-/* Targets both standard entries and PaperMod's special first-entry class */
 .post-entry, .first-entry {
-    background: var(--entry); /* Automatically adapts to light/dark toggles */
+    background: var(--entry); 
     border-radius: 15px;
     padding: 25px;
-    flex: 1 1 calc(50% - 20px); /* Sets up a responsive 2-column grid */
+    width: 100%; /* Stretches the tile comfortably across the page */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     
-    /* Sleek, non-blocky borders and shadows */
     border: 1px solid rgba(138, 43, 226, 0.15) !important; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                box-shadow 0.2s ease, 
-                border-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     overflow: hidden;
 }
 
-/* Enderman Neon Purple Glow on Hover */
 .post-entry:hover, .first-entry:hover {
     transform: translateY(-5px);
     border-color: var(--primary) !important;
     box-shadow: 0 8px 25px rgba(177, 84, 240, 0.25); 
 }
 
-/* Strips away the paragraph summaries completely */
 .post-entry .entry-content, .first-entry .entry-content {
     display: none !important;
 }
 
-/* Clean, sharp layout typography */
 .entry-header h2 {
     font-size: 1.4rem;
     line-height: 1.3;
@@ -65,7 +56,6 @@
     color: var(--primary);
 }
 
-/* Modern metadata alignment at the base of the tile */
 .entry-footer {
     font-size: 0.85rem;
     opacity: 0.6;
